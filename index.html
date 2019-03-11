@@ -4,13 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>GroCart</title>
     <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.7/angular.min.js"></script>
 </head>
-<body>
-    
+<body ng-app="grocartApp">
+    <h1>GroCart App</h1>
+    <div ng-controller="grocartCtrl as shoppingList">
+        <div class="input-group" style="width: 325px;">
+            <input type="text" class="form-control" ng-model="shoppingList.itemText" placeholder="Enter item name">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button" ng-click="shoppingList.addItem()">Add</button>
+            </div>
+        </div>
+        <ul>
+            <li ng-repeat="item in shoppingList.items">
+                {{ item.text }}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        //Define the 'grocartApp' module.
+        var grocartApp = angular.module('grocartApp', []);
+
+        //Define the 'grocartCtrl' controller on the 'grocartApp' module.
+        grocartApp.controller('grocartCtrl', function($scope) {
+            var shoppingList = this;
+            shoppingList.items = [];
+
+            shoppingList.addItem = function() {
+                shoppingList.items.push({text:shoppingList.itemText});
+                shoppingList.itemText='';
+            }
+        });
+    </script>
 </body>
 </html>
