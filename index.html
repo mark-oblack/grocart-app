@@ -13,17 +13,42 @@
 <body ng-app="grocartApp">
     <h1>GroCart App</h1>
     <div ng-controller="grocartCtrl as shoppingList">
-        <div class="input-group" style="width: 325px;">
-            <input type="text" class="form-control" ng-model="shoppingList.itemText" placeholder="Enter item name">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button" ng-click="shoppingList.addItem()">Add</button>
+        <form>
+            <div class="form-group" style="width: 325px;">
+                <label for="item-name">Item Name</label>
+                <input type="text" class="form-control" ng-model="shoppingList.itemText" placeholder="Enter item name" id="item-name">
+                <!-- <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" ng-click="shoppingList.addItem()">Add</button>
+                </div> -->
             </div>
-        </div>
-        <ul>
+            <div class="form-group">
+                <label for="item-category">Category</label>
+                <select class="form-control" id="item-category">
+                <option>Dairy</option>
+                <option>Produce</option>
+                <option>Meats</option>
+                <option>Frozen</option>
+                <option>Snacks</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="item-quantity">Quantity</label>
+                <select class="form-control" id="item-quantity" ng-model="shoppingList.itemQuantity">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                </select>
+            </div>
+        <button class="btn btn-primary" type="button" ng-click="shoppingList.addItem()">Add</button>
+        <ul class="shopping-list">
             <li ng-repeat="item in shoppingList.items">
-                {{ item.text }}
+                <input type="checkbox" ng-model="shoppingList.done" aria-label="Checkbox for shopping item">
+                <span class="done-{{shoppingList.done}}">{{ item.text }} <span class="item-quantity">({{item.quantity}})</span></span>
             </li>
         </ul>
+        <button class="btn btn-warning" type="button" ng-click="shoppingList.clear()">Clear List</button>
     </div>
 
     <script>
@@ -36,8 +61,12 @@
             shoppingList.items = [];
 
             shoppingList.addItem = function() {
-                shoppingList.items.push({text:shoppingList.itemText});
-                shoppingList.itemText='';
+                shoppingList.items.push({done:false, text:shoppingList.itemText, quantity:shoppingList.itemQuantity}); //adds item to list, checkbox to unchecked
+                shoppingList.itemText = ''; //resets item input to empty
+            }
+
+            shoppingList.clear = function() {
+                shoppingList.items = [];
             }
         });
     </script>

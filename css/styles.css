@@ -1,0 +1,36 @@
+/*=======================================
+Fonts
+=======================================*/
+@import url("https://use.typekit.net/moc0jjd.css");
+
+
+
+/*===================================
+General Styles
+===================================*/
+body, html {
+    font-family: proxima-nova, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 500px !important;
+}
+
+
+
+/*===================================
+Shopping List Styles
+===================================*/
+
+.shopping-list {
+    list-style: none;
+}
+
+.done-true {
+    text-decoration: line-through;
+}
+
+.item-quantity {
+    color: #b2bec3;
+}
